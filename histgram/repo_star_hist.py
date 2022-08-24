@@ -1,9 +1,8 @@
 from github import Github
 import matplotlib.pyplot as plt
-import seaborn
 
 # First create a Github instance:
-token = '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'
+token = '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'
 # using an access token
 g = Github(token)
 
@@ -26,6 +25,4 @@ plt.title('star_number')
 plt.xlabel('star_num')
 plt.ylabel('repo_num')
 #plt.show()
-seaborn.histplot(repo_star_num)
-
-#plt.savefig('repo_star_histgram.png')
+plt.savefig('repo_star_histgram.png')
