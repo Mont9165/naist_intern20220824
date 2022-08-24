@@ -2,7 +2,7 @@ from github import Github
 import matplotlib.pyplot as plt
 
 # First create a Github instance:
-token = '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'
+token = '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'
 # using an access token
 g = Github(token)
 
@@ -24,5 +24,5 @@ plt.hist(repo_star_num)
 plt.title('fork_number')
 plt.xlabel('fork_num')
 plt.ylabel('repo_num')
-plt.show()
+#plt.show()
 plt.savefig('repo_fork_histgram.png')

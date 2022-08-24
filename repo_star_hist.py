@@ -2,7 +2,7 @@ from github import Github
 import matplotlib.pyplot as plt
 
 # First create a Github instance:
-token = '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'
+token = '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'
 # using an access token
 g = Github(token)
 
@@ -20,9 +20,9 @@ for repo in repositories:
         break
     count += 1
     
-plt.hist(repo_star_num, normed=True)
+plt.hist(repo_star_num)
 plt.title('star_number')
 plt.xlabel('star_num')
 plt.ylabel('repo_num')
-plt.show()
-plt.savefig('normalize_repo_star_histgram.png')
+#plt.show()
+plt.savefig('repo_star_histgram.png')
