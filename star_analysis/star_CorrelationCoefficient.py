@@ -3,8 +3,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import scipy.stats as stats
 
-def CSVCreate(token):
+def CSVCreate(token, n):
     # First create a Github instance:
     
     # using an access token
@@ -19,7 +20,7 @@ def CSVCreate(token):
     star,fork,network,issue,subscriber,commit = [],[],[],[],[],[]
 
     for repo in repositories:
-        if count < 500:
+        if count < n:
             star.append(repo.stargazers_count)
             fork.append(repo.forks_count)
             network.append(repo.network_count)
@@ -34,7 +35,7 @@ def CSVCreate(token):
     df = pd.DataFrame(data=arr,index=['star','fork','network','issue','subscriber','commit'])
     df.to_csv('./star_analysis/star_data.csv')
 
-def ColorMap(df):
+def HeatMap(df):
     colormap = plt.cm.RdBu
     plt.figure()
     plt.title('Pearson Correlation of Features', y=1.05, size=15)
@@ -46,8 +47,9 @@ def ScatterPlot(df):
     pass
 
 class Main():
+    n = 500
     token = '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'
-    #CSVCreate(token)
+    #CSVCreate(token, n)
     df_csv = pd.read_csv('./star_analysis/star_data.csv')
     df_csv_T = df_csv.T
     df = (df_csv_T.iloc[1:,0:]).astype('int32')
@@ -55,9 +57,12 @@ class Main():
     df_corr = df.corr()
     #print(df_corr)
     #print(df_corr[0][0])
-    #ColorMap(df)
+    #CHeatMap(df)
     #plt.savefig('./star_analysis/pearson correlation.png')
-    for i in range(0,6):
-        print((df_corr[0][i]*np.sqrt(498))/np.sqrt(1-df_corr[0][i]**2))
-        pass
+    #for i in range(0,6):
+        #print((df_corr[0][i]*np.sqrt(n-2))/np.sqrt(1-df_corr[0][i]**2))
+    commit_max = np.var((df.iloc[0:100,5]).to_numpy())
+    commit_min = np.var((df.iloc[400:500,5]).to_numpy())
+    stats.ttest_ind(a=commit_max, b=commit_min, equal_var=True)
+    print(commit_max, commit_min)
     pass

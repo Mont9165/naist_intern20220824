@@ -1,7 +1,7 @@
 from github import Github
 
 # First create a Github instance:
-token = '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'
+token = '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'
 # using an access token
 g = Github(token)
 
