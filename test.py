@@ -9,11 +9,11 @@ g = Github(token)
 #g = Github(base_url="https://Mont9165/api/v3", login_or_token="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")
 
 # Then play with your Github objects:
-repositories = g.search_repositories(query='stars:>100000', sort='stars')
+repositories = g.search_repositories(query='forks:>50000', sort='forks')
 count = 0
 for repo in repositories:
     if count < 5:
-        print(repo)
+        print(repo.get_commits().totalCount)
     else:
         break
     count += 1
