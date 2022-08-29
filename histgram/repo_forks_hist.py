@@ -12,14 +12,14 @@ g = Github(token)
 # Then play with your Github objects:
 repositories = g.search_repositories(query='forks:>5000', sort='forks')
 count = 0
-repo_star_num = []
+repo_star = []
 for repo in repositories:
     if count < 500:
-        repo_star_num.append(repo.forks_count)
+        repo_star.append(repo.forks_count)
     else:
         break
     count += 1
-    
+
 plt.hist(repo_star_num)
 plt.title('fork_number')
 plt.xlabel('fork_num')
